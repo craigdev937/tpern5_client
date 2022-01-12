@@ -1,10 +1,22 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { PlayerAPI } from "../global/PlayerAPI";
+import { Item } from "./Item";
 
 export const List = (): JSX.Element => {
+    const { data } = PlayerAPI.useFetchAllQuery();
+
     return (
         <React.Fragment>
-            <h1>List</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio culpa inventore eius quam est asperiores dolorum quibusdam non veritatis sequi consectetur animi neque aut hic qui accusamus, nesciunt nulla temporibus!</p>
+            <button>
+                <Link to="/players/add">New Player</Link>
+            </button>
+            {data?.map((player) => (
+                <Item 
+                    key={player.id}
+                    player={player}
+                />
+            ))}
         </React.Fragment>
     );
 };
